@@ -16,7 +16,6 @@ gem 'mustache'
 gem 'haml'
 gem 'compass'
 
-gem 'simplegeo'
 
 group :development, :test do
   gem 'rspec-rails'
