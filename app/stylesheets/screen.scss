@@ -107,20 +107,22 @@ a {
       }
       .user_name {
         padding-top: 3px;
-        a {
-          display: block;
+
+      }
+      .twitter_handle {
+        padding: 3px 0;
+        .login {
+          text-decoration: none;
+          font-weight: normal;
+          color: silver;
+          font-size: 11px;
+          &:hover {
+           color: $blue;
+           text-decoration: underline;
+          }
         }
       }
-      .login {
-        text-decoration: none;
-        font-weight: normal;
-        color: silver;
-        font-size: 11px;
-        &:hover {
-         color: $blue;
-         text-decoration: underline;
-        }
-      }
+      
     }
     .timestamp {
       float: right;
