@@ -3,13 +3,116 @@
 body {
   @include helvetica;
 }
+#intro {
+  margin: 10px;
+  text-align: center;
+  padding: 10px;
+  background: #fffaf1;
+  border: 1px solid #feeabf;
+  @include border-radius(3px);
+  h1 {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 12px;
+  }
+}
+a {
+  color: $blue;
+  text-decoration: none;
+}
 #type_wrapper {
-  width: 320px;
-  float: right;
+  @include clearfix;
+  margin: 20px 11px;
+  outline: none;
+  input {
+    font-size: 20px;
+    outline: none;
+    padding: 10px;
+    @include border-radius(3px);
+    &[type="text"] {
+      height: 30px;
+      border: 2px solid #ddd;
+      width: 70%;
+      @include box-shadow(#ddd, 0, 0, 6px, 0, inset);
+      &:focus {
+        border-color: $blue;
+      }
+    }
+    &[type="submit"] {
+      font-weight: bold;
+      border: 1px solid #8abd43;
+      padding: 11px 0;
+      @include linear-gradient(color-stops($green, darken($green, 10%)));
+      color: #fff;
+      text-shadow: 0 -1px 1px darken($green, 30%);
+      width: 20%;
+      &:active {
+        @include linear-gradient(color-stops(darken($green, 2%), $green));
+      }
+    }
+  }
+  .error {
+    display: none;
+    top: 12px;
+    right: 190px;
+    position: absolute;
+    color: #f66;
+    font-size: 12px;
+  }
 }
 #chat_data {
-  width: 320px;
-  float: right;
+  li {
+    @include clearfix;
+    font-size: 14px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    color: #444;
+    &:nth-child(even) {
+      background: #f5fafe;
+    }
+    .byline {
+      font-weight: bold;
+      font-size: 12px;
+      img {
+        margin-right: 5px;
+      }
+      .img_wrapper {
+        margin-left: 3px;
+        padding: 3px;
+        @include box-shadow(#999, 0px, 1px, 3px);
+        @include border-radius(3px);
+        @include linear-gradient(color-stops(#eee, #fff), bottom);
+        width: 30px;
+        float: left;
+        margin-right: 8px;
+
+        img {
+          @include border-radius(3px);
+          vertical-align: middle;
+
+        }
+        
+      }
+      .user_name {
+      }
+
+    }
+    .message {
+      img{
+        max-width:200px;
+
+      }
+    }
+    .timestamp {
+      float: right;
+      color: silver;
+      font-size: 11px;
+    }
+
+    
+  }
 }
 
 /* iPhone 4, Opera Mobile 11 and other high pixel ratio devices ----------- */

@@ -17,6 +17,7 @@ Go::Application.routes.draw do
   end
 
   resources :posts
+  match "/users.json" => 'chats#users'
 
   match "/mustache_templates.js" => MustacheCacher
 

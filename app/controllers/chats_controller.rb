@@ -9,8 +9,21 @@ class ChatsController < ApplicationController
    @posts = Post.order('created_at DESC')
   end
   
+  def users
+    @users = User.select([:id, :name]).where("name like ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.json { render :json => @users.map(&:attributes) }
+    end
+  end
+  
   def send_data
-    msg = sanitize(auto_link(auto_image(params[:chat_input]), :html => { :target => '_blank' }), :tags => %w(a img), :attributes => %w(href src alt target))
+    msg = sanitize(
+            auto_link(
+              auto_image(
+                auto_mention(params[:chat_input])
+              ), :html => { :target => '_blank' }
+            ), :tags => %w(a img mark), :attributes => %w(href src alt target)
+          )
     @post = current_user.posts.create!(:chat_input => msg)
     post_data = {
       :command           => :broadcast,
