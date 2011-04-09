@@ -34,7 +34,8 @@ $(function() {
       var q = $(this).val().match(/(?:@)([\S]+)/i)[1]
       $.get('/users.json?q=' + q, function(data){
         var current_val = $('#chat_input').val()
-        $('#chat_input').val(current_val.replace(q, data[0].name))
+
+        //$('#chat_input').val(current_val.replace(q, data[0].name))
       })
     }
   })
