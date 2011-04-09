@@ -4,14 +4,19 @@ body {
   @include helvetica; 
   border-top: 3px solid #222;
   line-height: 20px;
+/*  background: image-url("bgslice.png");*/
 }
 a {
   color: $blue;
+  text-decoration: none;
 }
-h1 {
-  font-size: 1.5em;
-  margin: 10px 0;
+#intro {
+  h1 {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
 }
+
 #container {
  @include container;
  margin-top: 20px;
@@ -62,15 +67,6 @@ h1 {
     color: #f66;
     font-size: 12px;
   }
-  .loading {
-    display: none;
-    top: 11px;
-    right: 180px;
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: image-url('indicator.gif') no-repeat;
-  }
 }
 #chat_data {
   li {
@@ -85,8 +81,13 @@ h1 {
     .byline {
       @include column(4);
       line-height: 14px;
+
       font-weight: bold;
       font-size: 12px;
+      .user_name {
+        float:left;
+      }
+      
       img {
         margin-right: 5px;
       }
@@ -121,18 +122,19 @@ h1 {
         }
       }
     }
+    .timestamp {
+      float: right;
+      @include column(3, true);
+      color: silver;
+      font-size: 11px;
+    }
     .message {
       @include column(16);
       img{
         max-width:200px;
       }
     }
-    .timestamp {
-      text-align: right;
-      @include column(3, true);
-      color: silver;
-      font-size: 11px;
-    }
+
     &:hover {
       .timestamp {
         color: #666;
