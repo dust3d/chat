@@ -122,3 +122,19 @@ h1 {
     }
   }
 }
+#load_more{
+	input {
+		&[type="submit"] {
+		  font-weight: bold;
+		  border: 1px solid #8abd43;
+		  padding: 11px 0;
+		  @include column(4, true);
+		  @include linear-gradient(color-stops($green, darken($green, 10%)));
+		  color: #fff;
+		  text-shadow: 0 -1px 1px darken($green, 30%);
+		  &:active {
+		    @include linear-gradient(color-stops(darken($green, 2%), $green));
+		  }
+		}
+	}
+}

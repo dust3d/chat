@@ -1,5 +1,31 @@
 if (navigator.userAgent.match(/Mobile|WebOS/i)) var mobile = true;
 
+var app = {};
+app.current_page=1;
+app.tmpl = MustacheTemplates['chats/_post'];
+
+app.load_more_posts = function(){
+	app.current_page += 1;
+	$.getJSON('/?page='+app.current_page, function(data){
+		for( var i = 0, len = data.length; i<len; i++ ){
+			var post = {
+	      profile_image_url: data[i].profile_image_url,
+				twitter_login: data[i].twitter_login,
+	      name: data[i].name,
+	      chat_input: data[i].chat_input,
+	      time_ago: data[i].time_ago
+	    };
+	    if (mobile) {
+	      $('#chat_data').prepend(Mustache.to_html(app.tmpl, post));
+	    } else {
+				console.log(post);
+	      $('#chat_data').append(Mustache.to_html(app.tmpl, post));
+	    }
+		}
+    
+	})
+}
+
 $(function() {
   $('#chat_input').keypress(function(){
     $(this).removeAttr('style');
@@ -26,6 +52,9 @@ $(function() {
   });
   
   $('#chat_input').focus();
+	$('#load_more input').click(function(){
+		app.load_more_posts();
+	});
 });
 
 
