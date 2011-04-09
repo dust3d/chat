@@ -75,6 +75,7 @@ a {
     .byline {
       font-weight: bold;
       font-size: 12px;
+      float: left;
       img {
         margin-right: 5px;
       }
@@ -95,11 +96,30 @@ a {
         }
         
       }
-      .user_name {
+      .user_info {
+        float: left;
+        
+        .user_name {
+        }
+        .twitter_handle {
+          padding: 3px 0;
+          .login {
+            text-decoration: none;
+            font-weight: normal;
+            color: silver;
+            font-size: 11px;
+            &:hover {
+             color: $blue;
+             text-decoration: underline;
+            }
+          }
+        }
       }
 
     }
     .message {
+      float: right;
+      width: 70%;
       img{
         max-width:200px;
 

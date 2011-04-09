@@ -3,14 +3,15 @@
 
     <div class="img_wrapper">
       <img src="{{ profile_image_url }}" width="30" height="30" title="{{ name }}">
-    </div>  
-    <div class="user_name">
-      {{ name }}
     </div>
-    <div class="user_name">
-      <a href="http://twitter.com/{{ twitter_login }}" target="_blank" class="login">@{{ twitter_login }}</a>
+    <div class="user_info">  
+      <div class="user_name">
+        {{ name }}
+      </div>
+      <div class="twitter_handle">
+        <a href="http://twitter.com/{{ twitter_login }}" target="_blank" class="login">@{{ twitter_login }}</a>
+      </div>
     </div>
-      
   </span>
 
   <div class='message'>

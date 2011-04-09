@@ -23,7 +23,7 @@ a {
 }
 
 #type_wrapper {
-  @include clearfix;
+  @include pie-clearfix;
   margin: 20px 0;
   outline: none;
   position: relative;
@@ -67,10 +67,27 @@ a {
     color: #f66;
     font-size: 12px;
   }
+  .loading {
+    display: none;
+    top: 11px;
+    right: 180px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: image-url('indicator.gif') no-repeat;
+  }
+  #reply {
+    position: absolute;
+    background: white;
+    width: 750px;
+    border: 1px solid silver;
+    padding: 10px;
+    top: 40px;
+  }
 }
 #chat_data {
   li {
-    @include clearfix;
+    @include pie-clearfix;
     font-size: 14px;
     padding: 10px;
     border-top: 1px solid #eee;
@@ -107,20 +124,22 @@ a {
       }
       .user_name {
         padding-top: 3px;
-        a {
-          display: block;
+
+      }
+      .twitter_handle {
+        padding: 3px 0;
+        .login {
+          text-decoration: none;
+          font-weight: normal;
+          color: silver;
+          font-size: 11px;
+          &:hover {
+           color: $blue;
+           text-decoration: underline;
+          }
         }
       }
-      .login {
-        text-decoration: none;
-        font-weight: normal;
-        color: silver;
-        font-size: 11px;
-        &:hover {
-         color: $blue;
-         text-decoration: underline;
-        }
-      }
+      
     }
     .timestamp {
       float: right;
