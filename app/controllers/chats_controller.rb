@@ -24,7 +24,8 @@ class ChatsController < ApplicationController
               ), :html => { :target => '_blank' }
             ), :tags => %w(a img mark), :attributes => %w(href src alt target)
           )
-    @post = current_user.posts.create!(:chat_input => msg)
+          puts msg.inspect
+    @post = current_user.posts.create!(:chat_input => msg, :lat => params[:lat], :lon => params[:lon])
     post_data = {
       :command           => :broadcast,
       :body              => msg,

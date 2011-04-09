@@ -10,13 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110409152700) do
+ActiveRecord::Schema.define(:version => 20110409195933) do
 
   create_table "posts", :force => true do |t|
     t.text     "chat_input"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "lat"
+    t.float    "lon"
+    t.string   "location"
   end
 
   create_table "users", :force => true do |t|
