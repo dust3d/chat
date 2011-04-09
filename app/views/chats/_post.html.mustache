@@ -12,6 +12,10 @@
     {{{ chat_input }}}
   </div>
   <div class='timestamp'>
-    {{ time_ago }} ago
+    {{ time_ago }} ago 
+    {{#location }}
+    from {{location}} 
+    {{/location}}
+    
   </div>
 </li>
