@@ -13,6 +13,8 @@
   #type_wrapper
     - form_tag send_data_chat_path(:format => :json), :id => 'message_post_form' do
       = text_field_tag :chat_input, '', :placeholder => "#{current_user.name}: "
+      = hidden_field_tag :lat, '', :id => "lat"
+      = hidden_field_tag :lon, '', :id => "lon"
       = submit_tag 'Post'
       %span.error
         You can't submit an empty message!
