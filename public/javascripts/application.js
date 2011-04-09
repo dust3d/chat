@@ -57,6 +57,18 @@ $(function() {
 	});
 });
 
+$(function() {
+  $("#chat_input").keyup(function(e){
+    if($(this).val().match(/@[\S]+/i)){
+      var q = $(this).val().match(/(?:@)([\S]+)/i)[1]
+      $.get('/users.json?q=' + q, function(data){
+        var current_val = $('#chat_input').val()
+        $('#chat_input').val(current_val.replace(q, data[0].name))
+      })
+    }
+  })
+});
+
 
 (function($) {
   $.fn.request = function(success) {
@@ -81,6 +93,7 @@ pusher.bind('new_post',
       profile_image_url: data.profile_image_url,
 			twitter_login: data.twitter_login,
       name: data.name,
+      login: data.twiter_login,
       chat_input: data.body,
       time_ago: 'less than a minute'
     };
