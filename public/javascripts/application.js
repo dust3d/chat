@@ -2,24 +2,24 @@ if (navigator.userAgent.match(/Mobile|WebOS/i)) var mobile = true;
 var env;
 
 $(function() {
-  $('#chat_input').keypress(function(){
+  $('#post_message').keypress(function(){
     $(this).removeAttr('style');
     $('.error').hide();
     $('.loading').hide();
   });
   
-  $('#message_post_form').submit(function(e) {
+  $('#new_post').submit(function(e) {
     e.preventDefault();
     
-    var msg = $('#chat_input').val();
+    var msg = $('#post_message').val();
     if (msg !== "") {
       $('.loading').show();
       $(this).request(function(response) {
-        $('#chat_input').val('');
+        $('#post_message').val('');
         $('.loading').fadeOut('fast');
       }); 
     } else {
-      $('#chat_input').css({
+      $('#post_message').css({
         'border-color': 'red'
       }).focus();
       $('.error').show();
@@ -33,27 +33,27 @@ $(function() {
 
   pusher.bind('new_post',
     function(data) {
-      var tmpl = MustacheTemplates['chats/_post'];
+      var tmpl = MustacheTemplates['posts/_post'];
       var post = {
         profile_image_url: data.profile_image_url,
         twitter_login: data.twitter_login,
         name: data.name,
         login: data.twiter_login,
-        chat_input: data.body,
+        message: data.body,
         time_ago: 'less than a minute'
       };
       $('#chat_data').prepend(Mustache.to_html(tmpl, post));
     }
   );
   
-  $('#chat_input').focus();
+  $('#post_message').focus();
 
-  $("#chat_input").keyup(function(e){
+  $("#post_message").keyup(function(e){
     if($(this).val().match(/@[\S]+/i)){
       var q = $(this).val().match(/(?:@)([\S]+)/i)[1];
       $.get('/users.json?q=' + q, function(data){
-        var current_val = $('#chat_input').val();
-        $('#chat_input').val(current_val.replace(q, data[0].name));
+        var current_val = $('#post_message').val();
+        $('#post_message').val(current_val.replace(q, data[0].name));
       });
     }
   });

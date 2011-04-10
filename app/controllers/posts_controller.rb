@@ -1,32 +1,23 @@
-class ChatsController < ApplicationController
-  before_filter :login_required
-  protect_from_forgery :except => :post
-  respond_to :json
+class PostsController < ApplicationController
   include ApplicationHelper
+  before_filter :login_required
   delegate :link_to, :auto_link, :sanitize, :to => 'ActionController::Base.helpers'
 
   def index
-   @posts = Post.order('created_at DESC').includes(:user)
-   respond_to do |format|
-     format.html
-     format.json { render :json => @posts.collect {|post| {:profile_image_url => post.user.profile_image_url,:twitter_login => post.user.login, :name => post.user.name, :chat_input => sanitize(auto_link(auto_image(post.chat_input), :html => { :target => '_blank' }), :tags => %w(a img), :attributes => %w(href src alt target)), :time_ago => post.created_at} } }
-   end
-  end
-  
-  def users
-    @users = User.select([:id, :name]).where("name like ?", "%#{params[:q]}%")
+    @posts = Post.order('created_at DESC').includes(:user)
     respond_to do |format|
-      format.json { render :json => @users.map(&:attributes) }
+      format.html
+      format.json { render :json => @posts.collect {|post| {:profile_image_url => post.user.profile_image_url,:twitter_login => post.user.login, :name => post.user.name, :message => sanitize(auto_link(auto_image(post.message), :html => { :target => '_blank' }), :tags => %w(a img), :attributes => %w(href src alt target)), :time_ago => post.created_at} } }
     end
   end
-  
-  def send_data
+
+  def create
     if current_user.present?
       user = current_user
-      body = params[:chat_input]
+      body = params[:post].present? ? params[:post][:message] : params[:message]
     else
-      user = User.find(params[:id])
-      body = params[:body]
+      user = User.find(params[:user_id])
+      body = params[:message]
     end
     msg = sanitize(
             auto_link(
@@ -36,7 +27,7 @@ class ChatsController < ApplicationController
             ), :tags => %w(a img mark), :attributes => %w(href src alt target)
           )
 
-    if user.posts.create!(:chat_input => msg)
+    if user.posts.create(:message => msg)
       post_data = {
         :command           => :broadcast,
         :body              => msg,
@@ -50,6 +41,5 @@ class ChatsController < ApplicationController
     end
     render :nothing => true
   end
-  
-end
 
+end
