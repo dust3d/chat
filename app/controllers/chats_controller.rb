@@ -31,6 +31,7 @@ class ChatsController < ApplicationController
               ), :html => { :target => '_blank' }
             ), :tags => %w(a img mark), :attributes => %w(href src alt target)
           )
+
     if user.posts.create!(:chat_input => msg)
       post_data = {
         :command           => :broadcast,
@@ -41,7 +42,7 @@ class ChatsController < ApplicationController
         :type              => :to_channels_without_signature, 
         :channels          => 'groupon_go'
       }
-      Pusher['groupon_go'].trigger!('new_post', post_data)
+      Pusher["groupon_go_#{ Rails.env }"].trigger!('new_post', post_data)
     end
     render :nothing => true
   end
