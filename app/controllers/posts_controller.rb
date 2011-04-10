@@ -17,7 +17,7 @@ class PostsController < ApplicationController
       user = current_user
       body = params[:post].present? ? params[:post][:message] : params[:message]
     else
-      user = User.find(params[:user_id])
+      user = User.find_by_twitter_id(params[:user_id])
       body = params[:message]
     end
     msg = sanitize(
