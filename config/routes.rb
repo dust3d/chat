@@ -12,13 +12,9 @@ Go::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resource :chat do 
-    post 'send_data'
-  end
-
   resources :posts
-  match "/users.json" => 'chats#users'
 
+  match "/users.json" => 'chats#users'
   match "/mustache_templates.js" => MustacheCacher
 
   # Sample resource route with options:
@@ -56,7 +52,7 @@ Go::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "chats#index"
+  root :to => "posts#index"
 
   # See how all your routes lay out with "rake routes"
 

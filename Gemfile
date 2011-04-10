@@ -18,6 +18,9 @@ gem 'compass'
 
 gem 'geokit'
 
+gem "will_paginate", :git=>"git://github.com/mislav/will_paginate.git", :branch=>"rails3"
+
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl'

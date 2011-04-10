@@ -1,4 +1,5 @@
 #container
+  %span{:id => 'rails_env', 'data-value' => Rails.env, :class => 'js_attribute'}
 
   #intro 
     %h1
@@ -11,11 +12,11 @@
       Feel free to grab stories and send pull requests—we'll be merging and redeploying all day.
 
   #type_wrapper
-    - form_tag send_data_chat_path(:format => :json), :id => 'message_post_form' do
-      = text_field_tag :chat_input, '', :placeholder => "#{current_user.name}: "
+    - form_for Post.new, :format => :json, :id => 'message_post_form' do |f|
       = hidden_field_tag :lat, '', :id => "lat"
       = hidden_field_tag :lon, '', :id => "lon"
-      = submit_tag 'Post'
+      = f.text_field :message, :placeholder => "#{current_user.name}: "
+      = f.submit 'Post'
       %span.error
         You can't submit an empty message!
       %span.loading
@@ -24,4 +25,4 @@
   %ul#chat_data
     - @posts.each do |post|
 
-      = raw Mustache.render(File.read('./app/views/chats/_post.html.mustache'), {:profile_image_url => post.user.profile_image_url,:twitter_login => post.user.login, :name => post.user.name, :chat_input => post.chat_input, :location => post.location, :time_ago => time_ago_in_words(post.created_at)})
+      = raw Mustache.render(File.read('./app/views/posts/_post.html.mustache'), {:profile_image_url => post.user.profile_image_url,:twitter_login => post.user.login, :name => post.user.name, :message => post.message, :location => post.location, :time_ago => time_ago_in_words(post.created_at)})

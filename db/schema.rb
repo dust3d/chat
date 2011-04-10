@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110409195933) do
+ActiveRecord::Schema.define(:version => 20110410174141) do
 
   create_table "posts", :force => true do |t|
-    t.text     "chat_input"
+    t.text     "message"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
