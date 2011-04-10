@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   include ApplicationHelper
   before_filter :login_required
   delegate :link_to, :auto_link, :sanitize, :to => 'ActionController::Base.helpers'
+  protect_from_forgery :except => [:create]
 
   def index
     @posts = Post.order('created_at DESC').includes(:user)
