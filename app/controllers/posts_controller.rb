@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   include ApplicationHelper
-  before_filter :login_required
+  before_filter :login_required, :except => [:create]
   delegate :link_to, :auto_link, :sanitize, :to => 'ActionController::Base.helpers'
   protect_from_forgery :except => [:create]
 
