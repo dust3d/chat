@@ -1,7 +1,7 @@
 class PostController < ApplicationController
   before_filter :login_required
   def index
-    @posts = Post.all.order(:created_at)
+    @posts = Post.paginate :page => params[:page], :order => :created_at
   end
 
   def post

@@ -6,7 +6,11 @@ class ChatsController < ApplicationController
   delegate :link_to, :auto_link, :sanitize, :to => 'ActionController::Base.helpers'
 
   def index
-   @posts = Post.order('created_at DESC')
+   @posts = Post.paginate :page => params[:page], :order => 'created_at DESC'
+   respond_to do |format|
+     format.html
+     format.json { render :json => @posts.collect {|post| {:profile_image_url => post.user.profile_image_url,:twitter_login => post.user.login, :name => post.user.name, :chat_input => sanitize(auto_link(auto_image(post.chat_input), :html => { :target => '_blank' }), :tags => %w(a img), :attributes => %w(href src alt target)), :time_ago => post.created_at} } }
+   end
   end
   
   def users

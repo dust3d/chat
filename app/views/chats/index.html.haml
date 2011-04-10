@@ -23,3 +23,6 @@
   %ul#chat_data
     - @posts.each do |post|
       = raw Mustache.render(File.read('./app/views/chats/_post.html.mustache'), {:profile_image_url => post.user.profile_image_url,:twitter_login => post.user.login, :name => post.user.name, :chat_input => post.chat_input, :time_ago => time_ago_in_words(post.created_at)})
+
+  #load_more
+    = submit_tag 'Load more...'
